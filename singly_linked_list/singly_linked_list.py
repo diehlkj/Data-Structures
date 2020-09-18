@@ -37,7 +37,7 @@ class LinkedList:
     def add_to_tail(self, value):
         # * Create new node
         new_node = Node(value)
-        
+
         # * Empty list condition
         if self.head is None:
             # * Update head and tail attributes
@@ -105,3 +105,13 @@ class LinkedList:
     def get_max(self):
         # TODO time permitting
         pass
+
+    def get_Count(self):
+        temp = self.head  # * Initialise temp
+        count = 0  # * Initialise count
+
+        # * Loop while end of linked list is not reached
+        while (temp):
+            count += 1
+            temp = temp.next_node
+        return count
