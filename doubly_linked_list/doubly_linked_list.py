@@ -185,8 +185,8 @@ class DoublyLinkedList:
         if self.head is None:
             return None
         
-        cur_node = self.head  # * Initialise temp
-        maxVal = self.head.value  # * Initialise count
+        cur_node = self.head  # * Initialise list head
+        maxVal = self.head.value  # * Initialise value
 
         # * Loop while end of linked list is not reached
         while (cur_node):
@@ -194,13 +194,3 @@ class DoublyLinkedList:
                 maxVal = cur_node.value
             cur_node = cur_node.next
         return maxVal
-    
-    def get_count(self):
-        temp = self.head  # * Initialise temp
-        count = 0  # * Initialise count
-
-        # * Loop while end of linked list is not reached
-        while (temp):
-            count += 1
-            temp = temp.next
-        return count
