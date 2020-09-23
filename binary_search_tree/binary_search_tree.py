@@ -3,8 +3,9 @@ Binary search trees are a data structure that enforce an ordering over
 the data they store. That ordering in turn makes it a lot more efficient 
 at searching for a particular piece of data in the tree. 
 
-! value < node is stored left
-! value >= node is stored right
+! When returning in recursive functions, you shouldn't just call the function again
+! you should return it, that way when you exit the loop it doesnt return None
+? https://stackoverflow.com/questions/17778372/why-does-my-recursive-function-return-none
 
 This part of the project comprises two days:
 1. Implement the methods `insert`, `contains`, `get_max`, and `for_each`
@@ -24,13 +25,13 @@ class BSTNode:
             if self.left is None:
                 self.left = BSTNode(value)
             else:
-                self.left.insert(value)
+                return self.left.insert(value)
 
         if value >= self.value:
             if self.right is None:
                 self.right = BSTNode(value)
             else:
-                self.right.insert(value)
+                return self.right.insert(value)
     
     # ! Recursive Example:
         # ? if value < Root
@@ -59,25 +60,54 @@ class BSTNode:
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
+        # print(f"Target: {target} | Self: {self.value}\n")
+        if target == self.value:
+            # print(f"{self.value} IS {target} | RETURN TRUE\n")
+            return True
+        else:
+            if target < self.value:
+                if self.left is None:
+                    # print(f"{self.value} IS NOT {target} | RETURN FALSE\n")
+                    return False
+                else:
+                    # print(f"{self.value} IS NOT {target} | going LEFT\n")
+                    return self.left.contains(target)
+            if target > self.value:
+                if self.right is None:
+                    # print(f"{self.value} IS NOT {target} | RETURN FALSE\n")
+                    return False
+                else:
+                    # print(f"{self.value} IS NOT {target} | going RIGHT\n")
+                    return self.right.contains(target)
+            
         # ? if self.value is target
             # ? if yes 
                 # * return True
             # ? if no
                 # ? go left
                 # ? go right
-            
-        pass
 
     # Return the maximum value found in the tree
     def get_max(self):
+        if self.right is None:
+            return self.value
+        else:
+            return self.right.get_max()
+        
         # ? Go right until right is None
             # * Return the value of final branch of right
-        pass
+
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
+        if self.left is not None:
+            self.left.for_each(fn)
+        if self.right is not None:
+            self.right.for_each(fn)
+        return fn(self.value)
+    
         # ? Once side then the other...
-        pass
+            # * Returns fn(self.value)
 
     # Part 2 -----------------------
 
