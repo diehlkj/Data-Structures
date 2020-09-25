@@ -114,17 +114,53 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):
-        pass
+        if self.left is None and self.right is None:
+            return print(self.value)
+        else:
+            if self.left is not None:
+                self.left.in_order_print()
+            print(self.value)
+            if self.right is not None:
+                self.right.in_order_print()
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self):
-        pass
+        q = []
+        q.append(self)
+        while q:
+            if q[0].left is not None:
+                q.append(q[0].left)
+            
+            if q[0].right is not None:
+                q.append(q[0].right)
+                
+            print(q[0].value)
+            del q[0]
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self):
-        pass
+        # ? Create stack to keep track of nodes being searched
+        # ? PUSH 'self' into stack when we start branch
+        stk = []
+        stk.insert(0, self)
+        
+        # ? While something is still in the stack (Not dont processing)            
+            # ? Use exisiting for_each() as refrence for taversal Logic
+            # ? POP node from stack when we are done processing that nodes sub branches
+            # ? and dont forget to call 'print()'
+        while stk:
+            # ? PUSH node when we start processing
+            if stk[0].left is not None:
+                stk.insert(0, stk[0].left)
+                
+                if stk[0].right is not None:
+                    stk.insert(0, stk[0].right)
+                else:
+                    print(stk[0].value)
+            else:
+                print(stk[0].value)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -140,17 +176,17 @@ class BSTNode:
 """
 This code is necessary for testing the `print` methods
 """
-# bst = BSTNode(1)
+bst = BSTNode(1)
 
-# bst.insert(8)
-# bst.insert(5)
-# bst.insert(7)
-# bst.insert(6)
-# bst.insert(3)
-# bst.insert(4)
-# bst.insert(2)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
 
-# bst.bft_print()
+bst.bft_print()
 # bst.dft_print()
 
 # print("elegant methods")
